@@ -11,14 +11,15 @@ import {
   MatSortModule,
   MatTableModule,
   MatCheckboxModule,
-  MatLabel, MatFormFieldModule, MatInputModule
+  MatLabel, MatFormFieldModule, MatInputModule, MatRadioModule
 } from '@angular/material';
 import { ImagesCollectionNewComponent } from './images-collection-new/images-collection-new.component';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {InlineEditorModule} from '@qontu/ngx-inline-editor';
 import {
   ImagesCollectionTemplateComponent
 } from './images-collection-template/images-collection-template.component';
+
 
 @NgModule({
   imports: [
@@ -33,6 +34,7 @@ import {
     FormsModule,
     MatFormFieldModule,
     MatInputModule,
+    MatRadioModule,
     ReactiveFormsModule,
     InlineEditorModule,
     MatCheckboxModule

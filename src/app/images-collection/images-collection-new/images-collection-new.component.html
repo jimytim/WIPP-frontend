@@ -16,6 +16,67 @@
       <small class="form-text text-muted">Enter the collection name.</small>
     </div>
 
+    <div class="form-group">
+      <label for="format">Import source</label>
+      <span style="color: #e32"> * </span>
+      <br>
+      <mat-radio-group id="ImportSourceForm" 
+        class="source-radio-group" 
+        name="ImportSourceChoice"
+        [(ngModel)]="imagesCollection.importSource">
+        <mat-radio-button class="source-radio-button" 
+          *ngFor="let source of imagesCollectionSource | keyvalue" [value]="source.key">
+          {{ source.value }}
+        </mat-radio-button>
+      </mat-radio-group>
+
+      <div *ngIf="imagesCollection.importSource === 'source_0'">
+        <div class="form-group">
+          <label for="name">Directory Path</label>
+          <span style="color: #e32"> * </span>
+          <input type="text" id="local-path" class="form-control" name="path" autofocus required>
+          <small class="form-text text-muted">Enter path to local directory.</small>
+        </div>
+      </div>
+      
+      <div *ngIf="imagesCollection.importSource === 'source_1'">
+        <div class="form-group">
+          <label for="name">Bucket Name</label>
+          <span style="color: #e32"> * </span>
+          <input type="text" id="bucket-name" class="form-control" name="bucket" autofocus required>
+          <small class="form-text text-muted">Enter the bucket name</small>
+
+          <label for="name">Folder Name</label>
+          <span style="color: #e32"> * </span>
+          <input type="text" id="folder-name" class="form-control" name="folder" autofocus required>
+          <small class="form-text text-muted">Enter the folder name</small>
+        
+          <label for="name">Access Key ID</label>
+          <span style="color: #e32"> * </span>
+          <input type="text" id="accesskeyid" class="form-control" name="access-key-id" autofocus required>
+          <small class="form-text text-muted">Enter your access key ID.</small>
+      
+          <label for="name">Secret Access Key</label>
+          <span style="color: #e32"> * </span>
+          <input type="text" id="secretaccesskey" class="form-control" name="secret-access-key" autofocus required>
+          <small class="form-text text-muted">Enter your secret access key.</small>
+        </div>
+      </div>
+
+      <div *ngIf="imagesCollection.importSource === 'source_2'">
+        Please use this
+        <a href="https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=1086312548867-ehauhgcd1qtqppsj4e3ngpso7166u7e2.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fdrive.metadata.readonly+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fdrive.readonly&state=yhtzIt1D2SMB28sxvm51NKFxFpMudX&prompt=consent&access_type=offline" target="_blank">
+          Google Authentication Link
+        </a>
+        <div class="form-group">
+          <label for="name">Third-party App Authorization Code</label>
+          <span style="color: #e32"> * </span>
+          <input type="text" id="authorizationcode" class="form-control" name="authorization-code" autofocus required>
+          <small class="form-text text-muted">Enter the authorization code.</small>
+        </div>
+      </div>
+    </div>
+
     <mat-checkbox [(ngModel)]="usePattern" name="false">Filter images upon upload using a filename pattern</mat-checkbox>
     <span class="text-danger" *ngIf="!usePattern && imagesCollection.pattern">Warning: pattern is not empty, but this option is not checked</span>
 
