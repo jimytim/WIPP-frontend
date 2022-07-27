@@ -26,6 +26,8 @@ sed -i \
   -e 's|VISIONUI_URL|'"${VISIONUI_URL}"'|' \
   -e 's|CATALOGUI_URL|'"${CATALOGUI_URL}"'|' \
   -e 's|ARGOUIBASE_URL|'"${ARGOUIBASE_URL}"'|' \
+  -e 's|DISPLAY_LOCAL_IMPORT_OPTION|'"${DISPLAY_LOCAL_IMPORT_OPTION}"'|' \
+  -e 's|DISPLAY_LOCAL_IMPORT_OPTION|'"${DISPLAY_CLOUD_IMPORT_OPTION}"'|' \
   /var/www/frontend/assets/config/config.json
 
 nginx -g 'daemon off;'

@@ -1,8 +1,13 @@
-.source-radio-group {
+.options-radio-group {
     display: flex;
     flex-direction: row;
 }
 
 .mat-radio-button ~ .mat-radio-button {
-margin-left: 16px;
+    margin-left: 16px;
+}
+
+.input-label {
+    margin-top: 10px;
+    font-style: italic;
 }

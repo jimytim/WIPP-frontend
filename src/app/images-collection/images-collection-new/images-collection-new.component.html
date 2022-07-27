@@ -17,67 +17,125 @@
     </div>
 
     <div class="form-group">
-      <label for="format">Import source</label>
+      <label for="format">Import method</label>
       <span style="color: #e32"> * </span>
-      <br>
-      <mat-radio-group id="ImportSourceForm" 
-        class="source-radio-group" 
-        name="ImportSourceChoice"
-        [(ngModel)]="imagesCollection.importSource">
-        <mat-radio-button class="source-radio-button" 
-          *ngFor="let source of imagesCollectionSource | keyvalue" [value]="source.key">
-          {{ source.value }}
+      <mat-radio-group id="importMethod" 
+        class="options-radio-group"
+        [ngModelOptions]="{standalone: true}"
+        [(ngModel)]="imagesCollection.importMethod">
+
+        <mat-radio-button 
+        [value]="ImagesCollectionImportMethod.UPLOADED">
+          Browser upload 
+          <span placement="right" ngbTooltip="Upload images via web browser">
+            <i class="fas fa-question-circle"></i>
+          </span>
         </mat-radio-button>
+
+        <mat-radio-button *ngIf="displayLocalImportOption" 
+        [value]="ImagesCollectionImportMethod.BACKEND_IMPORT">
+          Backend import 
+          <!-- <i>(beta)</i>  -->
+          <span placement="right" ngbTooltip="Import images from a folder local to the server">
+            <i class="fas fa-question-circle"></i>
+          </span>
+        </mat-radio-button>
+
+        <mat-radio-button *ngIf="displayCloudImportOption" 
+        [value]="ImagesCollectionImportMethod.S3_IMPORT">
+          AWS S3 Bucket 
+          <!-- <i>(beta)</i>  -->
+          <span placement="right" ngbTooltip="Import images from a AWS S3 bucket">
+            <i class="fas fa-question-circle"></i>
+          </span>
+        </mat-radio-button>
+
+        <mat-radio-button *ngIf="displayCloudImportOption" 
+        [value]="ImagesCollectionImportMethod.GDRIVE_IMPORT">
+          Google Drive 
+          <!-- <i>(beta)</i>  -->
+          <span placement="right" ngbTooltip="Import images from a Google Drive folder">
+            <i class="fas fa-question-circle"></i>
+          </span>
+        </mat-radio-button>
+        
       </mat-radio-group>
 
-      <div *ngIf="imagesCollection.importSource === 'source_0'">
-        <div class="form-group">
-          <label for="name">Directory Path</label>
-          <span style="color: #e32"> * </span>
-          <input type="text" id="local-path" class="form-control" name="path" autofocus required>
-          <small class="form-text text-muted">Enter path to local directory.</small>
-        </div>
+      <div *ngIf="imagesCollection.importMethod == ImagesCollectionImportMethod.BACKEND_IMPORT">
+        <label class="input-label" for="name">Folder name</label>
+        <span style="color: #e32"> * </span>
+        <input type="text" class="form-control" 
+                [(ngModel)]="imagesCollection.sourceBackendImport" 
+                placeholder="Enter the name of the folder to import" 
+                name="sourceBackendimport" >
+        <!-- <small class="form-text text-muted">Sub text placeholder</small> -->
       </div>
       
-      <div *ngIf="imagesCollection.importSource === 'source_1'">
+      <div *ngIf="imagesCollection.importMethod == ImagesCollectionImportMethod.S3_IMPORT">
         <div class="form-group">
-          <label for="name">Bucket Name</label>
+          <label class="input-label" for="s3-bucket-name">Bucket Name</label>
           <span style="color: #e32"> * </span>
-          <input type="text" id="bucket-name" class="form-control" name="bucket" autofocus required>
-          <small class="form-text text-muted">Enter the bucket name</small>
+          <input id="s3-bucket-name" type="text" class="form-control" 
+                 [(ngModel)]="imagesCollection.s3BucketName"
+                 placeholder="Enter the name of the bucket" 
+                 name="s3-bucket">
+          <!-- <small class="form-text text-muted">Enter the bucket name</small> -->
 
-          <label for="name">Folder Name</label>
+          <label class="input-label" for="s3-folder-name">Folder Name</label>
           <span style="color: #e32"> * </span>
-          <input type="text" id="folder-name" class="form-control" name="folder" autofocus required>
-          <small class="form-text text-muted">Enter the folder name</small>
+          <input id="s3-folder-name" type="text" class="form-control" 
+                 [(ngModel)]="imagesCollection.s3FolderName"
+                 placeholder="Enter the name of the folder" 
+                 name="s3-folder">
+          <!-- <small class="form-text text-muted">Enter the folder name</small> -->
         
-          <label for="name">Access Key ID</label>
+          <label class="input-label" for="s3-access-key-id">Access Key ID</label>
           <span style="color: #e32"> * </span>
-          <input type="text" id="accesskeyid" class="form-control" name="access-key-id" autofocus required>
-          <small class="form-text text-muted">Enter your access key ID.</small>
+          <input id="s3-access-key-id" type="text" class="form-control" 
+                 [(ngModel)]="imagesCollection.s3AccessKeyID"
+                 placeholder="Enter your access key ID"
+                 name="s3-access-key-id">
+          <!-- <small class="form-text text-muted">Enter your access key ID.</small> -->
       
-          <label for="name">Secret Access Key</label>
+          <label class="input-label" for="s3-secret-access-key">Secret Access Key</label>
           <span style="color: #e32"> * </span>
-          <input type="text" id="secretaccesskey" class="form-control" name="secret-access-key" autofocus required>
-          <small class="form-text text-muted">Enter your secret access key.</small>
+          <input id="s3-secret-access-key" type="text" class="form-control"
+                 [(ngModel)]="imagesCollection.s3SecretAccessKey"
+                 placeholder="Enter your secret access key"
+                 name="s3-secret-access-key">
+          <!-- <small class="form-text text-muted">Enter your secret access key.</small> -->
         </div>
       </div>
 
-      <div *ngIf="imagesCollection.importSource === 'source_2'">
+      <div *ngIf="imagesCollection.importMethod == ImagesCollectionImportMethod.GDRIVE_IMPORT">
         Please use this
-        <a href="https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=1086312548867-ehauhgcd1qtqppsj4e3ngpso7166u7e2.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fdrive.metadata.readonly+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fdrive.readonly&state=yhtzIt1D2SMB28sxvm51NKFxFpMudX&prompt=consent&access_type=offline" target="_blank">
+        <a href="https://accounts.google.com/o/oauth2/auth?client_id=1086312548867-ehauhgcd1qtqppsj4e3ngpso7166u7e2.apps.googleusercontent.com&redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=code&access_type=offline&scope=https://www.googleapis.com/auth/drive.metadata.readonly%20https://www.googleapis.com/auth/drive.readonly" target="_blank">
           Google Authentication Link
-        </a>
+        </a> to generate your code
         <div class="form-group">
-          <label for="name">Third-party App Authorization Code</label>
+          <label class="input-label" for="gdrive-authorization-code">Third-party App Authorization Code</label>
           <span style="color: #e32"> * </span>
-          <input type="text" id="authorizationcode" class="form-control" name="authorization-code" autofocus required>
-          <small class="form-text text-muted">Enter the authorization code.</small>
+          <input id="gdrive-authorization-code" type="text" class="form-control" 
+                [(ngModel)]="imagesCollection.gdriveCode"
+                placeholder="Enter your access code"
+                name="gdrive-authorization-code">
+          <!-- <small class="form-text text-muted">Enter the authorization code.</small> -->
+
+          <label class="input-label" for="gdrive-folder-name">Folder name</label>
+          <span style="color: #e32"> * </span>
+          <input id="gdrive-folder-name" type="text" class="form-control" 
+                [(ngModel)]="imagesCollection.gdriveFolderName"
+                placeholder="Enter the name of the folder to import"
+                name="gdrive-folder-name">
+          <!-- <small class="form-text text-muted">Enter the folder name.</small> -->
         </div>
       </div>
+      
     </div>
 
-    <mat-checkbox [(ngModel)]="usePattern" name="false">Filter images upon upload using a filename pattern</mat-checkbox>
+    <mat-checkbox *ngIf="imagesCollection.importMethod==ImagesCollectionImportMethod.UPLOADED"
+                  [(ngModel)]="usePattern" name="false">Filter images upon upload using a filename pattern
+    </mat-checkbox>
     <span class="text-danger" *ngIf="!usePattern && imagesCollection.pattern">Warning: pattern is not empty, but this option is not checked</span>
 
     <div class="row" *ngIf="usePattern">

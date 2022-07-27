@@ -4,8 +4,15 @@ export class ImagesCollection {
   creationDate: Date;
   sourceJob: string;
   sourceCatalog: string;
-  importMethod: string;
-  importSource: ImagesCollectionSource;
+  sourceBackendImport: string;
+  importMethod: ImagesCollectionImportMethod;
+  // cloudImportData: CloudProviderImportData;
+  s3SecretAccessKey: string;
+  s3AccessKeyID: string;
+  s3BucketName: string;
+  s3FolderName: string;
+  gdriveCode: string;
+  gdriveFolderName: string;
   locked: boolean;
   numberOfImages: number;
   imagesTotalSize: number;
@@ -18,6 +25,10 @@ export class ImagesCollection {
   owner: string;
   publiclyShared: boolean;
   _links: any;
+
+  // constructor() {
+  //   this.cloudImportData = new CloudProviderImportData();
+  // }
 }
 
 export interface PaginatedImagesCollections {
@@ -26,9 +37,29 @@ export interface PaginatedImagesCollections {
   _links: any;
 }
 
-
-export enum ImagesCollectionSource { 
-  source_0 = 'Local', 
-  source_1 = 'S3 Bucket', 
-  source_2 = 'Google Drive'
+export enum ImagesCollectionImportMethod {
+  UPLOADED,
+  GDRIVE_IMPORT,
+  BACKEND_IMPORT,
+  JOB,
+  CATALOG,
+  S3_IMPORT
 }
+
+// export enum ImagesCollectionImportMethod {
+//   UPLOADED,
+//   JOB,
+//   CATALOG,
+//   BACKEND_IMPORT,
+//   S3_IMPORT,
+//   GDRIVE_IMPORT
+// }
+
+// export class CloudProviderImportData {
+//   s3SecretAccessKey: string;
+//   s3AccessKeyID: string;
+//   s3BucketName: string;
+//   s3FolderName: string;
+//   gdriveCode: string;
+//   gdriveFolderName: string;
+// }

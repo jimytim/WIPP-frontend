@@ -20,7 +20,6 @@ import {
   ImagesCollectionTemplateComponent
 } from './images-collection-template/images-collection-template.component';
 
-
 @NgModule({
   imports: [
     CommonModule,
