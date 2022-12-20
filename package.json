@@ -29,6 +29,7 @@
     "@swimlane/ngx-charts": "^12.0.1",
     "@swimlane/ngx-graph": "^6.2.0",
     "@types/flowjs": "0.0.31",
+    "@types/gapi.auth2": "^0.0.56",
     "@types/marked": "^0.6.5",
     "@types/prismjs": "^1.16.0",
     "@types/url-join": "^4.0.0",

@@ -3,6 +3,8 @@ import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ImagesCollection, ImagesCollectionImportMethod} from '../images-collection';
 import {AppConfigService} from '../../app-config.service';
 
+declare var google: any;
+
 @Component({
   selector: 'app-images-collection-new',
   templateUrl: './images-collection-new.component.html',
@@ -39,4 +41,21 @@ export class ImagesCollectionNewComponent implements OnInit {
     this.modalReference.close(this.imagesCollection);
   }
 
+  gGriveAuth() {
+    var client = google.accounts.oauth2.initCodeClient({
+      client_id: this.appConfigService.getConfig().googleWIPPCredentialClientId,
+      scope: 'https://www.googleapis.com/auth/drive.readonly https://www.googleapis.com/auth/drive.metadata.readonly',
+      ux_mode: 'popup',
+      response_type: 'code',
+      redirect_uri: this.appConfigService.getConfig().googleWIPPCredentialClientRedirectUri,
+      callback: (response) => {
+        console.log(response);
+        var code = response.code;
+        this.imagesCollection.gdriveCode = code;
+        console.log(code);
+      }
+    });
+
+    client.requestCode();
+  }
 }

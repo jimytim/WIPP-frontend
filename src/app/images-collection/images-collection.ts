@@ -13,6 +13,8 @@ export class ImagesCollection {
   s3FolderName: string;
   gdriveCode: string;
   gdriveFolderName: string;
+  gdriveFileExtensions: string;
+  gdriveRecursive: boolean;
   locked: boolean;
   numberOfImages: number;
   imagesTotalSize: number;
@@ -39,21 +41,12 @@ export interface PaginatedImagesCollections {
 
 export enum ImagesCollectionImportMethod {
   UPLOADED,
-  GDRIVE_IMPORT,
-  BACKEND_IMPORT,
   JOB,
   CATALOG,
-  S3_IMPORT
+  BACKEND_IMPORT,
+  S3_IMPORT,
+  GDRIVE_IMPORT
 }
-
-// export enum ImagesCollectionImportMethod {
-//   UPLOADED,
-//   JOB,
-//   CATALOG,
-//   BACKEND_IMPORT,
-//   S3_IMPORT,
-//   GDRIVE_IMPORT
-// }
 
 // export class CloudProviderImportData {
 //   s3SecretAccessKey: string;

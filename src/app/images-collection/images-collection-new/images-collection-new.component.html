@@ -83,6 +83,9 @@
 
           <label class="input-label" for="s3-folder-name">Folder Name</label>
           <span style="color: #e32"> * </span>
+          <span placement="right" ngbTooltip="Use the common S3 key prefix as a folder path">
+            <i class="fas fa-question-circle"></i>
+          </span>
           <input id="s3-folder-name" type="text" class="form-control" 
                  [(ngModel)]="imagesCollection.s3FolderName"
                  placeholder="Enter the name of the folder" 
@@ -99,7 +102,7 @@
       
           <label class="input-label" for="s3-secret-access-key">Secret Access Key</label>
           <span style="color: #e32"> * </span>
-          <input id="s3-secret-access-key" type="text" class="form-control"
+          <input id="s3-secret-access-key" type="password" class="form-control"
                  [(ngModel)]="imagesCollection.s3SecretAccessKey"
                  placeholder="Enter your secret access key"
                  name="s3-secret-access-key">
@@ -108,27 +111,54 @@
       </div>
 
       <div *ngIf="imagesCollection.importMethod == ImagesCollectionImportMethod.GDRIVE_IMPORT">
-        Please use this
-        <a href="https://accounts.google.com/o/oauth2/auth?client_id=1086312548867-ehauhgcd1qtqppsj4e3ngpso7166u7e2.apps.googleusercontent.com&redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=code&access_type=offline&scope=https://www.googleapis.com/auth/drive.metadata.readonly%20https://www.googleapis.com/auth/drive.readonly" target="_blank">
-          Google Authentication Link
-        </a> to generate your code
         <div class="form-group">
-          <label class="input-label" for="gdrive-authorization-code">Third-party App Authorization Code</label>
+          <!-- <label class="input-label" for="gdrive-authorization-code">Third-party App Authorization Code</label>
           <span style="color: #e32"> * </span>
           <input id="gdrive-authorization-code" type="text" class="form-control" 
                 [(ngModel)]="imagesCollection.gdriveCode"
                 placeholder="Enter your access code"
-                name="gdrive-authorization-code">
+                name="gdrive-authorization-code"> -->
           <!-- <small class="form-text text-muted">Enter the authorization code.</small> -->
 
           <label class="input-label" for="gdrive-folder-name">Folder name</label>
           <span style="color: #e32"> * </span>
+          <span placement="right" ngbTooltip="Use the '/' delimiter between folder names. (Ex: '/FolderA/FolderB')">
+            <i class="fas fa-question-circle"></i>
+          </span>
           <input id="gdrive-folder-name" type="text" class="form-control" 
                 [(ngModel)]="imagesCollection.gdriveFolderName"
-                placeholder="Enter the name of the folder to import"
+                placeholder="Enter the name of the folder to import (starting with '/')"
                 name="gdrive-folder-name">
           <!-- <small class="form-text text-muted">Enter the folder name.</small> -->
+          <mat-checkbox 
+                [(ngModel)]="useFileExtensionFilter" 
+                name="false">Filter files by extensions
+          </mat-checkbox>
+          <span class="text-danger" *ngIf="!useFileExtensionFilter && imagesCollection.gdriveFileExtensions">Warning: extension list is not empty, but this option is not checked</span>
+
+          <div *ngIf="useFileExtensionFilter">
+            <input id="gdrive-file-extensions" type="text" class="form-control"
+                    [(ngModel)]="imagesCollection.gdriveFileExtensions"   
+                    name="gdrive-file-extensions"
+                    placeholder="Ex: '.jpeg', '.png'"
+                    autofocus
+                    required>
+            <small class="form-text text-muted">Enter a list of file extension.</small>
+          </div>
+          <div>
+          <mat-checkbox 
+                [(ngModel)]="imagesCollection.gdriveRecursive" 
+                name="false">Recursive download (nested folders)
+          </mat-checkbox>
         </div>
+        </div>
+
+        <p>Please authenticate and authorize WIPP if necessary:</p>
+        <button type="button" name="google-sign-in" class="btn btn-primary" (click)="gGriveAuth()">
+          <i class="fas fa-sign-in-alt" style="margin-right: 10px">
+            <p style="margin-left: 10px; display: inline; font-family: 'Roboto', sans-serif ; font-weight: normal">Google Sign-in</p>
+          </i>
+        </button>
       </div>
       
     </div>
