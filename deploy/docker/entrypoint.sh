@@ -19,7 +19,7 @@ sed -i \
     -e "s|@KEYCLOAK_URL_VALUE@|${KEYCLOAK_URL}|g" \
     /var/www/frontend/main.*.js
 
-# Update external tools URLs in frontend conf
+# Update external tools URLs and options in frontend conf
 sed -i \
   -e 's|TENSORBOARD_URL|'"${TENSORBOARD_URL}"'|' \
   -e 's|JUPYTERHUB_URL|'"${JUPYTERHUB_URL}"'|' \
