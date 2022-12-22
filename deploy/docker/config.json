@@ -4,5 +4,8 @@
   "plotsUiUrl": "VISIONUI_URL",
   "argoUiBaseUrl": "ARGOUIBASE_URL",
   "catalogUiUrl": "CATALOGUI_URL",
-  "displayLocalImportOption": "DISPLAY_LOCAL_IMPORT_OPTION"
+  "displayLocalImportOption": "DISPLAY_LOCAL_IMPORT_OPTION",
+  "displayCloudImportOption": "DISPLAY_CLOUD_IMPORT_OPTION",
+  "googleWIPPCredentialClientId": "GOOGLE_WIPP_CLIENT_ID",
+  "googleWIPPCredentialClientRedirectUri": "GOOGLE_WIPP_CLIENT_REDIRECT_URI"
 }

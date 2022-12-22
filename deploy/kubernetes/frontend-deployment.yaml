@@ -30,6 +30,10 @@ spec:
           value: DISPLAY_LOCAL_IMPORT_OPTION_VALUE
         - name: DISPLAY_CLOUD_IMPORT_OPTION
           value: DISPLAY_CLOUD_IMPORT_OPTION_VALUE
+        - name: GOOGLE_WIPP_CLIENT_ID
+          value: GOOGLE_WIPP_CLIENT_ID_VALUE
+        - name: GOOGLE_WIPP_CLIENT_REDIRECT_URI
+          value: GOOGLE_WIPP_CLIENT_REDIRECT_URI_VALUE
         ports:
         - containerPort: 80
       restartPolicy: Always
