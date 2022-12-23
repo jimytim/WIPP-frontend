@@ -49,10 +49,8 @@ export class ImagesCollectionNewComponent implements OnInit {
       response_type: 'code',
       redirect_uri: this.appConfigService.getConfig().googleWIPPCredentialClientRedirectUri,
       callback: (response) => {
-        console.log(response);
         var code = response.code;
         this.imagesCollection.gdriveCode = code;
-        console.log(code);
       }
     });
 
