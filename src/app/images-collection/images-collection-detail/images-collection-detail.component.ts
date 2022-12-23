@@ -5,7 +5,7 @@ import * as Flow from '@flowjs/flow.js';
 import {NgbModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {BytesPipe, NgMathPipesModule} from 'angular-pipes';
 import {ImagesCollectionService} from '../images-collection.service';
-import {ImagesCollection} from '../images-collection';
+import {ImagesCollection, ImagesCollectionImportMethod} from '../images-collection';
 import {Image} from '../image';
 import {MatPaginator, MatSort} from '@angular/material';
 import {BehaviorSubject, from, Observable, of as observableOf, Subject} from 'rxjs';
@@ -32,6 +32,7 @@ export class ImagesCollectionDetailComponent implements OnInit, AfterViewInit {
 
   flowHolder: Flow.IFlow;
   imagesCollection: ImagesCollection = new ImagesCollection();
+  ImagesCollectionImportMethod = ImagesCollectionImportMethod;
   images: Observable<Image[]>;
   metadataFiles: Observable<MetadataFile[]>;
   sourceJob: Job = null;
