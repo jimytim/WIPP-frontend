@@ -26,7 +26,7 @@ export class ImagesCollectionNewComponent implements OnInit {
       this.displayLocalImportOption = true;
     }
 
-    if (this.appConfigService.getConfig().displayLocalImportOption) {
+    if (this.appConfigService.getConfig().displayCloudImportOption) {
       this.displayCloudImportOption = true;
     }
   }

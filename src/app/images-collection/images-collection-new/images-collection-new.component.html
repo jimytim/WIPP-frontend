@@ -107,6 +107,21 @@
                  placeholder="Enter your secret access key"
                  name="s3-secret-access-key">
           <!-- <small class="form-text text-muted">Enter your secret access key.</small> -->
+          <mat-checkbox 
+                [(ngModel)]="useFileExtensionFilter" 
+                name="false">Filter files by extensions
+          </mat-checkbox>
+          <span class="text-danger" *ngIf="!useFileExtensionFilter && imagesCollection.gdriveFileExtensions">Warning: extension list is not empty, but this option is not checked</span>
+
+          <div *ngIf="useFileExtensionFilter">
+            <input id="s3-file-extensions" type="text" class="form-control"
+                    [(ngModel)]="imagesCollection.s3FileExtensions"   
+                    name="s3-file-extensions"
+                    placeholder="Ex: '.jpeg', '.png'"
+                    autofocus
+                    required>
+            <small class="form-text text-muted">Enter a list of file extension.</small>
+          </div>
         </div>
       </div>
 
@@ -168,7 +183,7 @@
     </mat-checkbox>
     <span class="text-danger" *ngIf="!usePattern && imagesCollection.pattern">Warning: pattern is not empty, but this option is not checked</span>
 
-    <div class="row" *ngIf="usePattern">
+    <div class="row" *ngIf="usePattern && imagesCollection.importMethod == ImagesCollectionImportMethod.UPLOADED">
       <div class="col-sm-8">
         <input type="text" [(ngModel)]="imagesCollection.pattern" id="pattern" class="form-control" name="pattern"
                autofocus

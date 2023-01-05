@@ -11,6 +11,7 @@ export class ImagesCollection {
   s3AccessKeyID: string;
   s3BucketName: string;
   s3FolderName: string;
+  s3FileExtensions: string;
   gdriveCode: string;
   gdriveFolderName: string;
   gdriveFileExtensions: string;
