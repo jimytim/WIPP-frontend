@@ -1,6 +1,6 @@
 import {Component, Input, NgModule, OnInit} from '@angular/core';
 import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {ImagesCollection, ImagesCollectionImportMethod} from '../images-collection';
+import {ImagesCollection, ImagesCollectionImportMethod, GDriveFolderAccessType} from '../images-collection';
 import {AppConfigService} from '../../app-config.service';
 
 declare var google: any;
@@ -18,6 +18,7 @@ export class ImagesCollectionNewComponent implements OnInit {
   usePattern = false;
   // constructor(private activeModal: NgbActiveModal) { }
   ImagesCollectionImportMethod = ImagesCollectionImportMethod;
+  GDriveFolderAccessType = GDriveFolderAccessType;
   displayLocalImportOption = false;
   displayCloudImportOption = false;
 
@@ -33,6 +34,7 @@ export class ImagesCollectionNewComponent implements OnInit {
 
   ngOnInit() {
     this.imagesCollection.importMethod = ImagesCollectionImportMethod.UPLOADED;
+    this.imagesCollection.gdriveFolderAccessType = GDriveFolderAccessType.PATH;
   }
   cancel() {
     this.modalReference.dismiss();

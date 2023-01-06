@@ -17,9 +17,10 @@
     </div>
 
     <div class="form-group">
-      <label for="format">Import method</label>
+      <label for="importMethodSelect">Import method</label>
       <span style="color: #e32"> * </span>
-      <mat-radio-group id="importMethod" 
+      <mat-radio-group id="importMethod"
+        name="importMethodSelect"
         class="options-radio-group"
         [ngModelOptions]="{standalone: true}"
         [(ngModel)]="imagesCollection.importMethod">
@@ -134,17 +135,38 @@
                 placeholder="Enter your access code"
                 name="gdrive-authorization-code"> -->
           <!-- <small class="form-text text-muted">Enter the authorization code.</small> -->
-
-          <label class="input-label" for="gdrive-folder-name">Folder name</label>
+          <label for="GDriveFolderAccessSelect">Folder Access type</label>
           <span style="color: #e32"> * </span>
-          <span placement="right" ngbTooltip="Use the '/' delimiter between folder names. (Ex: '/FolderA/FolderB')">
-            <i class="fas fa-question-circle"></i>
-          </span>
-          <input id="gdrive-folder-name" type="text" class="form-control" 
-                [(ngModel)]="imagesCollection.gdriveFolderName"
-                placeholder="Enter the name of the folder to import (starting with '/')"
-                name="gdrive-folder-name">
-          <!-- <small class="form-text text-muted">Enter the folder name.</small> -->
+          <mat-radio-group id="GDriveFolderAccessSelect" name="GDriveFolderAccessSelect" class="options-radio-group"
+                [ngModelOptions]="{standalone: true}" 
+                [(ngModel)]="imagesCollection.gdriveFolderAccessType">
+              <mat-radio-button [value]="GDriveFolderAccessType.PATH">Folder Path
+                <span placement="right" ngbTooltip="Use a directory path to specify the folder.">
+                  <i class="fas fa-question-circle"></i>
+                </span>
+              </mat-radio-button>
+              <mat-radio-button [value]="GDriveFolderAccessType.IDURL">Folder Id/Url
+                <span placement="right" ngbTooltip="Use the folder's Id or the folder browser url">
+                  <i class="fas fa-question-circle"></i>
+                </span>
+              </mat-radio-button>
+          </mat-radio-group>
+
+          <div *ngIf="imagesCollection.gdriveFolderAccessType === GDriveFolderAccessType.PATH">
+            <input id="gdrive-folder-path-value" type="text" class="form-control" 
+            [(ngModel)]="imagesCollection.gdriveFolderAccessValue"
+            placeholder="Enter the path of the folder to import (starting with '/')"
+            name="gdrive-folder-path-value">
+            <small class="form-text text-muted">Use the '/' delimiter between folder names. (Ex: '/FolderA/FolderB')</small>
+          </div>
+          <div *ngIf="imagesCollection.gdriveFolderAccessType === GDriveFolderAccessType.IDURL">
+            <input id="gdrive-folder-idurl-value" type="text" class="form-control" 
+            [(ngModel)]="imagesCollection.gdriveFolderAccessValue"
+            placeholder="Enter the ID of the folder to import or the full folder browser url."
+            name="gdrive-folder-idurl-value">
+            <small class="form-text text-muted">Provide either the folder Id or the folder url</small>
+          </div>
+         
           <mat-checkbox 
                 [(ngModel)]="useGDriveFileExtensionFilter" 
                 name="false">Filter files by extensions

@@ -13,7 +13,8 @@ export class ImagesCollection {
   s3FolderName: string;
   s3FileExtensions: string;
   gdriveCode: string;
-  gdriveFolderName: string;
+  gdriveFolderAccessType: GDriveFolderAccessType;
+  gdriveFolderAccessValue: string;
   gdriveFileExtensions: string;
   gdriveRecursive: boolean;
   locked: boolean;
@@ -47,6 +48,11 @@ export enum ImagesCollectionImportMethod {
   BACKEND_IMPORT,
   S3_IMPORT,
   GDRIVE_IMPORT
+}
+
+export enum GDriveFolderAccessType {
+  PATH,
+  IDURL
 }
 
 // export class CloudProviderImportData {
