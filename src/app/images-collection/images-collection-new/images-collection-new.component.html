@@ -108,12 +108,12 @@
                  name="s3-secret-access-key">
           <!-- <small class="form-text text-muted">Enter your secret access key.</small> -->
           <mat-checkbox 
-                [(ngModel)]="useFileExtensionFilter" 
+                [(ngModel)]="useS3FileExtensionFilter" 
                 name="false">Filter files by extensions
           </mat-checkbox>
-          <span class="text-danger" *ngIf="!useFileExtensionFilter && imagesCollection.gdriveFileExtensions">Warning: extension list is not empty, but this option is not checked</span>
+          <span class="text-danger" *ngIf="!useS3FileExtensionFilter && imagesCollection.s3FileExtensions">Warning: extension list is not empty, but this option is not checked</span>
 
-          <div *ngIf="useFileExtensionFilter">
+          <div *ngIf="useS3FileExtensionFilter && imagesCollection.importMethod == ImagesCollectionImportMethod.S3_IMPORT">
             <input id="s3-file-extensions" type="text" class="form-control"
                     [(ngModel)]="imagesCollection.s3FileExtensions"   
                     name="s3-file-extensions"
@@ -146,12 +146,12 @@
                 name="gdrive-folder-name">
           <!-- <small class="form-text text-muted">Enter the folder name.</small> -->
           <mat-checkbox 
-                [(ngModel)]="useFileExtensionFilter" 
+                [(ngModel)]="useGDriveFileExtensionFilter" 
                 name="false">Filter files by extensions
           </mat-checkbox>
-          <span class="text-danger" *ngIf="!useFileExtensionFilter && imagesCollection.gdriveFileExtensions">Warning: extension list is not empty, but this option is not checked</span>
+          <span class="text-danger" *ngIf="!useGDriveFileExtensionFilter && imagesCollection.gdriveFileExtensions">Warning: extension list is not empty, but this option is not checked</span>
 
-          <div *ngIf="useFileExtensionFilter">
+          <div *ngIf="useGDriveFileExtensionFilter && imagesCollection.importMethod == ImagesCollectionImportMethod.GDRIVE_IMPORT">
             <input id="gdrive-file-extensions" type="text" class="form-control"
                     [(ngModel)]="imagesCollection.gdriveFileExtensions"   
                     name="gdrive-file-extensions"
