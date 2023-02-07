@@ -91,7 +91,7 @@
                  [(ngModel)]="imagesCollection.s3FolderName"
                  placeholder="Enter the name of the folder" 
                  name="s3-folder">
-          <!-- <small class="form-text text-muted">Enter the folder name</small> -->
+          <small class="form-text text-muted">Standard folder names must end with a '/'.</small>
         
           <label class="input-label" for="s3-access-key-id">Access Key ID</label>
           <span style="color: #e32"> * </span>
@@ -121,7 +121,7 @@
                     placeholder="Ex: '.jpeg', '.png'"
                     autofocus
                     required>
-            <small class="form-text text-muted">Enter a list of file extension.</small>
+            <small class="form-text text-muted">Extensions must be in single quotes, with a coma delimiter.</small>
           </div>
         </div>
       </div>
@@ -180,7 +180,7 @@
                     placeholder="Ex: '.jpeg', '.png'"
                     autofocus
                     required>
-            <small class="form-text text-muted">Enter a list of file extension.</small>
+            <small class="form-text text-muted">Extensions must be in single quotes, with a coma delimiter.</small>
           </div>
           <div>
           <mat-checkbox 
